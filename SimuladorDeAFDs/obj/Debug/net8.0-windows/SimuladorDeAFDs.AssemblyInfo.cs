@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SimuladorDeAFDs")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e29640c63803c6e4f9127b3493cc38e7008bc06b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ebe74a18f1148351d7c63c4b2e084603c6a9be72")]
 [assembly: System.Reflection.AssemblyProductAttribute("SimuladorDeAFDs")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SimuladorDeAFDs")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
