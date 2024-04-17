@@ -1,4 +1,5 @@
 using SimuladorDeAFDs.Entities;
+using System.Windows.Forms;
 
 namespace SimuladorDeAFDs
 {
@@ -14,6 +15,13 @@ namespace SimuladorDeAFDs
             this.tabelaTransicoes.Columns.Add("Estados");
         }
 
+        private void Clear()
+        {
+            this.textoSimbolo.Clear(); this.textoSimbolo.Focus();
+            this.selecionaSimbolo.Text = string.Empty;
+            this.selecionaEstado.Text = string.Empty;
+        }
+
         private void BotaoAdicionarS_Click(object sender, EventArgs e)
         {
             try
@@ -22,7 +30,7 @@ namespace SimuladorDeAFDs
                 {
                     this._alfabeto.Add(Convert.ToChar(this.textoSimbolo.Text));
                     this.tabelaTransicoes.Columns.Add(this.textoSimbolo.Text);
-                    Atualiza();
+                    Atualiza(); Clear();
                 } else
                 {
                     throw new Exception("O simbolo não pode ser inserido");
@@ -58,7 +66,7 @@ namespace SimuladorDeAFDs
         {
             this._estados.Add(new Estado());
             this.tabelaTransicoes.Items.Add(this._estados.Last().Nome);
-            Atualiza();
+            Atualiza(); Clear();
         }
 
         private void BotaoRemover_Click(object sender, EventArgs e)
@@ -84,7 +92,7 @@ namespace SimuladorDeAFDs
                 Estado.QuantReal--;
                 if (Estado.QuantReal == 0)
                     Estado.QuantEstados = 0;
-                AtualizaPeloDicionario(); Atualiza();
+                AtualizaPeloDicionario(); Atualiza(); Clear();
             } catch (Exception ex)
             {
                 MessageBox.Show($"Erro: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -110,7 +118,7 @@ namespace SimuladorDeAFDs
                         }
                     }
                 });
-                AtualizaPeloDicionario(); Atualiza();
+                AtualizaPeloDicionario(); Atualiza(); Clear();
             } catch (Exception ex)
             {
                 MessageBox.Show($"Erro: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -130,18 +138,18 @@ namespace SimuladorDeAFDs
                             if (y == Convert.ToChar(this.selecionaSimbolo.Text))
                             {
                                 x.Transicoes[y] = this.selecionaEstado.Text;
-                                for (int cont = 0;cont < this.tabelaTransicoes.Items.Count;cont++)
+                                for (int cont = 0; cont < this.tabelaTransicoes.Items.Count; cont++)
                                 {
-                                    if(x.Nome == this.tabelaTransicoes.Items[cont].Text)
+                                    if (x.Nome == this.tabelaTransicoes.Items[cont].Text)
                                     {
-                                        this.tabelaTransicoes.Items[cont].SubItems[this._alfabeto.IndexOf(y)+1].Text = x.Transicoes[y];
+                                        this.tabelaTransicoes.Items[cont].SubItems[this._alfabeto.IndexOf(y) + 1].Text = x.Transicoes[y];
                                     }
                                 }
                             }
                         });
                     }
                 });
-                AtualizaPeloDicionario(); Atualiza();
+                AtualizaPeloDicionario(); Atualiza(); Clear();
             } catch (Exception ex)
             {
                 MessageBox.Show($"Erro: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -152,10 +160,47 @@ namespace SimuladorDeAFDs
         {
             for (int cont = 0; cont < tabelaTransicoes.Items.Count; cont++)
             {
-                foreach(var simb in _alfabeto)
+                foreach (var simb in _alfabeto)
                 {
-                    this.tabelaTransicoes.Items[cont].SubItems[this._alfabeto.IndexOf(simb)+1].Text = this._estados[cont].Transicoes[simb];
+                    this.tabelaTransicoes.Items[cont].SubItems[this._alfabeto.IndexOf(simb) + 1].Text = this._estados[cont].Transicoes[simb];
                 }
+            }
+        }
+
+        private void testarPalavra_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.palavra.Focus();
+                if(string.Compare(this.palavra.Text, string.Empty) == 0)
+                {
+                    throw new Exception("A palavra não ser vazia!");
+                }
+                Estado? estadoAtual = this._estados.First();
+                foreach (var simb in this.palavra.Text.ToCharArray())
+                {
+                    if (estadoAtual.Transicoes.TryGetValue(simb, out string? value) && value != "-")
+                    {
+                        estadoAtual = this._estados.Find(x => x.Nome == value);
+                    } else
+                    {
+                        this.palavraTestada.Text = $"O palavra {this.palavra.Text} foi recusada!";
+                        this.palavraTestada.ForeColor = Color.Red; this.palavra.Text = string.Empty; return;
+                    }
+                }
+                if (estadoAtual.EstadoFinal)
+                {
+                    this.palavraTestada.Text = $"O palavra {this.palavra.Text} foi aceita!";
+                    this.palavraTestada.ForeColor = Color.Green;
+                } else
+                {
+                    this.palavraTestada.Text = $"O palavra {this.palavra.Text} foi recusada!";
+                    this.palavraTestada.ForeColor = Color.Red;
+                }
+                this.palavra.Text = string.Empty;
+            } catch(Exception ex)
+            {
+                MessageBox.Show($"Erro: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
