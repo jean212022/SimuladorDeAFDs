@@ -28,60 +28,114 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
-            listView1 = new ListView();
-            textBox1 = new TextBox();
-            button2 = new Button();
+            BotaoAdicionarS = new Button();
+            tabelaTransicoes = new ListView();
+            textoSimbolo = new TextBox();
+            BotaoAdicionar = new Button();
+            BotaoRemover = new Button();
+            selecionaEstado = new DomainUpDown();
+            AdicionaTransicao = new Button();
+            selecionaSimbolo = new DomainUpDown();
+            BotaoFinal = new Button();
             SuspendLayout();
             // 
-            // button1
+            // BotaoAdicionarS
             // 
-            button1.Location = new Point(559, 50);
-            button1.Name = "button1";
-            button1.Size = new Size(100, 23);
-            button1.TabIndex = 1;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            BotaoAdicionarS.Location = new Point(559, 50);
+            BotaoAdicionarS.Name = "BotaoAdicionarS";
+            BotaoAdicionarS.Size = new Size(120, 23);
+            BotaoAdicionarS.TabIndex = 1;
+            BotaoAdicionarS.Text = "Adicionar Simbolo";
+            BotaoAdicionarS.UseVisualStyleBackColor = true;
+            BotaoAdicionarS.Click += BotaoAdicionarS_Click;
             // 
-            // listView1
+            // tabelaTransicoes
             // 
-            listView1.Location = new Point(12, 12);
-            listView1.Name = "listView1";
-            listView1.Size = new Size(509, 276);
-            listView1.TabIndex = 2;
-            listView1.UseCompatibleStateImageBehavior = false;
-            listView1.View = View.Details;
-            this.listView1.Columns.Add("Estados");
+            tabelaTransicoes.FullRowSelect = true;
+            tabelaTransicoes.Location = new Point(12, 12);
+            tabelaTransicoes.Name = "tabelaTransicoes";
+            tabelaTransicoes.Size = new Size(509, 276);
+            tabelaTransicoes.TabIndex = 2;
+            tabelaTransicoes.UseCompatibleStateImageBehavior = false;
+            tabelaTransicoes.View = View.Details;
             // 
-            // textBox1
+            // textoSimbolo
             // 
-            textBox1.Location = new Point(559, 21);
-            textBox1.MaxLength = 1;
-            textBox1.Name = "textBox1";
-            textBox1.PlaceholderText = "Insira o simbolo aqui";
-            textBox1.Size = new Size(100, 23);
-            textBox1.TabIndex = 3;
+            textoSimbolo.Location = new Point(559, 21);
+            textoSimbolo.MaxLength = 1;
+            textoSimbolo.Name = "textoSimbolo";
+            textoSimbolo.PlaceholderText = "Insira o simbolo aqui";
+            textoSimbolo.Size = new Size(120, 23);
+            textoSimbolo.TabIndex = 3;
             // 
-            // button2
+            // BotaoAdicionar
             // 
-            button2.Location = new Point(559, 79);
-            button2.Name = "button2";
-            button2.Size = new Size(100, 23);
-            button2.TabIndex = 4;
-            button2.Text = "button2";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
+            BotaoAdicionar.Location = new Point(559, 79);
+            BotaoAdicionar.Name = "BotaoAdicionar";
+            BotaoAdicionar.Size = new Size(120, 23);
+            BotaoAdicionar.TabIndex = 4;
+            BotaoAdicionar.Text = "Adicionar Estado";
+            BotaoAdicionar.UseVisualStyleBackColor = true;
+            BotaoAdicionar.Click += BotaoAdicionar_Click;
+            // 
+            // BotaoRemover
+            // 
+            BotaoRemover.Location = new Point(559, 108);
+            BotaoRemover.Name = "BotaoRemover";
+            BotaoRemover.Size = new Size(120, 23);
+            BotaoRemover.TabIndex = 5;
+            BotaoRemover.Text = "Remover Estado";
+            BotaoRemover.UseVisualStyleBackColor = true;
+            BotaoRemover.Click += BotaoRemover_Click;
+            // 
+            // selecionaEstado
+            // 
+            selecionaEstado.Location = new Point(559, 155);
+            selecionaEstado.Name = "selecionaEstado";
+            selecionaEstado.Size = new Size(120, 23);
+            selecionaEstado.TabIndex = 6;
+            // 
+            // AdicionaTransicao
+            // 
+            AdicionaTransicao.Location = new Point(559, 213);
+            AdicionaTransicao.Name = "AdicionaTransicao";
+            AdicionaTransicao.Size = new Size(120, 23);
+            AdicionaTransicao.TabIndex = 7;
+            AdicionaTransicao.Text = "Adicionar Transição";
+            AdicionaTransicao.UseVisualStyleBackColor = true;
+            AdicionaTransicao.Click += AdicionaTransicao_Click;
+            // 
+            // selecionaSimbolo
+            // 
+            selecionaSimbolo.Location = new Point(559, 184);
+            selecionaSimbolo.Name = "selecionaSimbolo";
+            selecionaSimbolo.Size = new Size(120, 23);
+            selecionaSimbolo.TabIndex = 8;
+            // 
+            // BotaoFinal
+            // 
+            BotaoFinal.Location = new Point(539, 265);
+            BotaoFinal.Name = "BotaoFinal";
+            BotaoFinal.Size = new Size(178, 23);
+            BotaoFinal.TabIndex = 9;
+            BotaoFinal.Text = "Adicionar Estado Final";
+            BotaoFinal.UseVisualStyleBackColor = true;
+            BotaoFinal.Click += BotaoFinal_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(button2);
-            Controls.Add(textBox1);
-            Controls.Add(listView1);
-            Controls.Add(button1);
+            Controls.Add(BotaoFinal);
+            Controls.Add(selecionaSimbolo);
+            Controls.Add(AdicionaTransicao);
+            Controls.Add(selecionaEstado);
+            Controls.Add(BotaoRemover);
+            Controls.Add(BotaoAdicionar);
+            Controls.Add(textoSimbolo);
+            Controls.Add(tabelaTransicoes);
+            Controls.Add(BotaoAdicionarS);
             Name = "Form1";
             Text = "Form1";
             ResumeLayout(false);
@@ -89,9 +143,14 @@
         }
 
         #endregion
-        private Button button1;
-        private ListView listView1;
-        private TextBox textBox1;
-        private Button button2;
+        private Button BotaoAdicionarS;
+        private ListView tabelaTransicoes;
+        private TextBox textoSimbolo;
+        private Button BotaoAdicionar;
+        private Button BotaoRemover;
+        private DomainUpDown selecionaEstado;
+        private Button AdicionaTransicao;
+        private DomainUpDown selecionaSimbolo;
+        private Button BotaoFinal;
     }
 }
